@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 
+//import { FormatFileSizePipe } from './format-file-size.pipe';
 
 @NgModule({
   imports: [

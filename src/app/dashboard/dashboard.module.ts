@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { DashboardPageRoutingModule } from './dashboard-routing.module';
+import { FormatFileSizePipe } from './format-file-size.pipe';
 
 import { DashboardPage } from './dashboard.page';
 
@@ -16,6 +17,6 @@ import { DashboardPage } from './dashboard.page';
     DashboardPageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [DashboardPage],
+  declarations: [DashboardPage,FormatFileSizePipe],
 })
 export class DashboardPageModule {}

@@ -1,14 +1,23 @@
 <ion-header>
-  <ion-toolbar color="warning">
-    <ion-title>FRIENDSCHAT</ion-title>
+  <ion-toolbar color="danger">
+    <ion-title style="text-align: center">CHAT BIMESTRAL</ion-title>
     <ion-buttons slot="end">
       <ion-button fill="clear" (click)="signOut()">
         <ion-icon name="log-in-outline" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
-  </ion-toolbar>
+  </ion-toolbar>  
 </ion-header>
-
+<br />
+    <br />
+<div *ngIf="trackSnapshot | async as snap" style="color:goldenrod">
+    Sobre la imagen:
+      Tamaño del Archivo: {{ snap.totalBytes | formatFileSize }} 
+      
+      Estado de envío: {{ snap.bytesTransferred | formatFileSize }}
+    </div>
+    <br />
+    <br />
 <ion-content class="ion-padding">
   <ion-grid>
     <ion-row *ngFor="let message of messages | async">
@@ -28,7 +37,7 @@
 <ion-footer backgroungcolor="#AFB2B9">
   <ion-toolbar color="light">
     <ion-row class="ion-align-items-center">
-      <ion-col size="9">
+      <ion-col size="6">
         <ion-textarea
           autoGrow="true"
           autofocus
@@ -36,10 +45,27 @@
           rows="1"
           maxLength="500"
           [(ngModel)]="newMsg"
+          placeholder="Escribir mensaje"          
         >
         </ion-textarea>
       </ion-col>
-      <ion-col size="3">
+      <ion-col size="4">
+        <ion-button
+          expand="block"
+          fill="clear"
+          color="primary"
+          [disabled]="newMsg === ''"
+          class="msg-btn"
+        >        
+      <ion-card-content>        
+        <ion-button color="primary" size="small">                    
+          <input type="file" size="small" (change)="uploadImage($event.target.files)" />
+          <ion-icon name="image-outline"></ion-icon>
+        </ion-button>
+      </ion-card-content>          
+        </ion-button>        
+      </ion-col>
+      <ion-col size="2">
         <ion-button
           expand="block"
           fill="clear"
@@ -48,11 +74,10 @@
           class="msg-btn"
           (click)="sendMessage()"
         >
-          <ion-button color="success" expand="small" fill="outline"
-            >Enviar</ion-button
-          >
+          <ion-icon color="warning" name="send-outline"></ion-icon>
+          
         </ion-button>
-      </ion-col>
+      </ion-col>      
     </ion-row>
   </ion-toolbar>
 </ion-footer>
